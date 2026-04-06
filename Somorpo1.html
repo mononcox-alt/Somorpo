@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shilkhali High School - Somorpo'24 সমর্প'२४ Science Batch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: slideDown 0.8s ease;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header .bengali-title {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin: 10px 0;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .batch-info {
+            background: rgba(255,255,255,0.95);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .batch-info h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .batch-info p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            box-shadow: 0 5px 25px rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.95);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .stat-card h3 {
+            color: #667eea;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card p {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th {
+            padding: 18px;
+            text-align: left;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9em;
+        }
+
+        td {
+            padding: 15px 18px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tbody tr {
+            transition: all 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: #f8f9ff;
+            transform: scale(1.005);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .student-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .phone-link {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .phone-link:hover {
+            color: #764ba2;
+        }
+
+        .blood-positive {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .blood-negative {
+            color: #007bff;
+            font-weight: 600;
+        }
+
+        .blood-na {
+            color: #999;
+            font-weight: 600;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header .bengali-title {
+                font-size: 1.8em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 12px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card p {
+                font-size: 2em;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Shilkhali High School</h1>
+            <div class="bengali-title"><strong>সমর্প'২৪</strong></div>
+            <p class="subtitle">"A batch of SHS"</p>
+        </div>
+
+        <div class="batch-info">
+            <h2>📚 Students Information</h2>
+            <p>Science Group - Class of 2024</p>
+        </div>
+
+        <input 
+            type="text" 
+            class="search-box" 
+            id="searchInput" 
+            placeholder="🔍 Search students by name, phone, blood group, or address..."
+            onkeyup="filterTable()"
+        >
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Total Students</h3>
+                <p id="totalStats">62</p>
+            </div>
+            <div class="stat-card">
+                <h3>👩Girls</h3>
+                <p id="girlsStats">23</p>
+            </div>
+            <div class="stat-card">
+                <h3>👨Boys</h3>
+                <p id="visibleStats">39</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table id="studentTable">
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Student Name</th>
+                        <th>Father's Name</th>
+                        <th>Mother's Name</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Blood Group</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Student data will be populated by JavaScript -->
+                </tbody>
+            </table>
+            <div id="noResults" class="no-results hidden">
+                No students found matching your search.
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📍 Shilkhali High School, Shilkhali, Pekua, Cox's Bazar, Bangladesh</p>
+            <p>Created by SHAWHARDYO | Last Updated: April 2026</p>
+        </div>
+    </div>
+
+    <script>
+        const students = [
+            {id:1, name:'Fariha Zannat', father:'Md. Sarwar Alam', mother:'Taslima Begum', address:'Jarulbonia, Shilkhali', phone:'01610524742', blood:'B+', gender:'F'},
+            {id:2, name:'Tajkeratul Jannat Ahona', father:'Md. Noman Shafi', mother:'Horine Jannat', address:'North Mehernama, Pekua', phone:'01640743208', blood:'O+', gender:'F'},
+            {id:3, name:'Foujia Sharmin Pori', father: 'Golam Mowla', mother:'Khalesa Begum', address:'Varuakhali, Barabakia', phone:'01823943191', blood:'A+', gender:'F'},
+            {id:4, name:'Fariha Afrin Kanchy', father:'Abdul Mannan', mother:'Ismat Ara Jannat Kajol', address:'Alekdiapara, Shilkhali', phone:'01818264428', blood:'B+', gender:'F'},
+            {id:5, name:'Sarjina Sultana Jeny', father:'Mohammad Sekandar', mother:'Jannatul Naima Ferdous', address:'Mognama, Pekua', phone:'01894338058', blood:'B+', gender:'F'},
+            {id:6, name:'Resfia Hanif Miliya', father:'Abu Hanif', mother:'Lilifa Yeasmin', address:'Alekdiapara, Shilkhali', phone:'01912773484', blood:'B+', gender:'F'},
+            {id:7, name:'Mahmuda Siddika Tabassum', father:'Mohammad Ullah', mother:'Jannatul Ferdous', address:'Sayednagar, Shilkhali', phone:'01818296380', blood:'O+', gender:'F'},
+            {id:8, name:'Iftahani Etu', father:'Abu Bakkar', mother:'Shamila Jannat', address:'Mocynnakata, Pekua', phone:'01812506969', blood:'O-', gender:'F'},
+            {id:9, name:'Nowshin Jannat Rafi', father:'Md. Ershad', mother:'Hosne Ara Begum', address:'Sabujpara, Shilkhali', phone:'01823191196', blood:'A+', gender:'F'},
+            {id:10, name:'Sharjin Mostari Nafi', father:'Morshedul Alam', mother:'Setara Begum', address:'Alompara, Shilkhali', phone:'01811862929', blood:'B+', gender:'F'},
+            {id:11, name:'Sobeh Tamanni', father:'Md. Selim Ul Azim', mother:'Rajiya Sultana', address:'PahariyaKhali, Barabakia', phone:'01823970408', blood:'N/A', gender:'F'},
+            {id:12, name:'Sabrina Jannat Asfi', father:'Shihab Uddin', mother:'Amena Jannat', address:'Petan Matbor Para, Shilkhali', phone:'01834087870', blood:'O+', gender:'F'},
+            {id:13, name:'Fatema Jannat Mili', father:'Mojammel Hosain', mother:'Parvin Akter', address:'Jarulbonia, Shilkhali', phone:'01892659266', blood:'O+', gender:'F'},
+            {id:14, name:'Tania Jannat', father:'Sami Uddin', mother:'Josna Akter', address:'Chorapara, Pekua', phone:'01833475030', blood:'O+', gender:'F'},
+            {id:15, name:'Tashfia Jannat Zino', father:'Akter Ahmad', mother:'Rejina Begum', address:'Sobujpara, Shilkhali', phone:'01624880771', blood:'A+', gender:'F'},
+            {id:16, name:'Nuri Jannat', father:'Nurunnabi', mother:'Taslima Begum', address:'Sikdar Para, Pekua', phone:'01606193880', blood:'O+', gender:'F'},
+            {id:17, name:'Tasnim Helal Zinia', father:'Late. Helal Uddin', mother:'Selina Akter', address:'Hajirghona, Shilkhali', phone:'01838670844', blood:'B+', gender:'F'},
+            {id:18, name:'Samiha Alam', father:'Nurul Alam', mother:'Ayesha Siddika', address:'East Varuakhali, Shilkhali', phone:'01781597559', blood:'A+', gender:'F'},
+            {id:19, name:'Noushin Sujtana Jenifa', father:'Nurul Alam Kaderi', mother:'Jannatul Ferdous', address:'Shilkhali', phone:'01880488944', blood:'O+', gender:'F'},
+            {id:20, name:'Suraiya Afrin Rahi', father:'Jashim Uddin', mother:'Shahina Akter', address:'Petan Matbor Para, Shilkhali', phone:'01887214260', blood:'B+', gender:'F'},
+            {id:21, name:'Fatematuj Jannat Orin', father:'Md. Sawkat Akbar', mother:'Khokon Akter', address:'Pohorchada, Chakaria', phone:'01826588037', blood:'O+', gender:'F'},
+            {id:22, name:'Saima Akter', father:'Sarwar Uddin', mother:'Maleka Begum', address:'Majherghona, Shilkhali', phone:'01618333409', blood:'N/A', gender:'F'},
+            {id:23, name:'Tasnim Sultana Nishu', father:'Jahir Uddin', mother:'Fatema Jannat Ranu', address:'Miajan Para, Shilkhali', phone:'01820294407', blood:'O+', gender:'F'},
+            {id:24, name:'Mohammad Mahmudul Hasan Shakil', father:'Sarwar Kamal', mother:'Shakiltun Jannat Riko', address:'Mohuripara, Mognama', phone:'01836241017', blood:'O+', gender:'M'},
+            {id:25, name:'Monon Shawhardyo', father:'Md. Golam Nabi', mother:'Mariam Jamila', address:'Varuakhali, Barabakia', phone:'01619611741', blood:'A+', gender:'M'},
+            {id:26, name:'Mahir Tajwar Jaien', father:'Md. Mahfuzur Rahman', mother:'Shamima Sultana', address:'Alekdia Para, Shilkhali', phone:'01608947380', blood:'O+', gender:'M'},
+            {id:27, name:'Mashfiq Hossine Jami', father:'Imam Hossine', mother:'Maleka Sultana', address:'Petan Matbar Para, Shilkhali', phone:'01888314309', blood:'AB+', gender:'M'},
+            {id:28, name:'Mohammad Zia Uddin', father:'Mohammad Kausar Uddin', mother:'Bulbul Akhter', address:'Marichyadiya, Mognama', phone:'01784586933', blood:'O+', gender:'M'},
+            {id:29, name:'Mohammad Hatem', father:'Shahab Uddin', mother:'Renu Ara Begum', address:'Munshimora, Shilkhali', phone:'01824539862', blood:'O+', gender:'M'},
+            {id:30, name:'Ayub Khan', father:'Ruhul Amin', mother:'Khairun Nesha', address:'Sikder Para, Puichari', phone:'01620126754', blood:'B+', gender:'M'},
+            {id:31, name:'Nuren Ishrak Nihal', father:'Mohammad Nasir Uddin', mother:'Parvin Akter', address:'Kacharimora, Shilkhali', phone:'01334105308', blood:'A+', gender:'M'},
+            {id:32, name:'Fahim Mustafa Faiyaz', father:'Golam Mustafa', mother:'Rehana Begum', address:'Varuakhali, Barabakia', phone:'01815061701', blood:'B+', gender:'M'},
+            {id:33, name:'Md. Rubel', father:'Omar Faruk', mother:'Rokeya Begum', address:'Pahariyakhali, Barabakia', phone:'01885648402', blood:'A+', gender:'M'},
+            {id:34, name:'Shahriyar Majid', father:'Abdul Majid', mother:'Nure Jannat Ayesha Siddika', address:'South Mehernama, Pekua Sadar', phone:'01823456789', blood:'B-', gender:'M'},
+            {id:35, name:'Emamul Haque Emon', father:'Azizul Haque', mother:'Razia Begum', address:'Annar Ali Matbbar Para, Pekua', phone:'01881561862', blood:'A-', gender:'M'},
+            {id:36, name:'Abul Hasnat Ar Rafi', father:'Ansar Ali', mother:'Shawkatunnesa Ruji', address:'Miapara, Pekua', phone:'01606199880', blood:'A+', gender:'M'},
+            {id:37, name:'Mohammad Tawsif Reza', father:'Akhtar Ahmed', mother:'Bulbul Jannat', address:'Kacharimora, Shilkhali', phone:'01811198276', blood:'O+', gender:'M'},
+            {id:38, name:'Mohammad Shefayet Ullah', father:'Md. Mozammel Haque', mother:'Hajera Begum', address:'Hedayatabad, Shilkhali', phone:'01618450498', blood:'AB-', gender:'M'},
+            {id:39, name:'Sayyed Tauqir Adnan', father:'Mohammad Kafil Uddin', mother:'Raunak Jahan Chowdhury', address:'Petan Matbar Para, Shilkhali', phone:'01815633130', blood:'B+', gender:'M'},
+            {id:40, name:'Jisanul Karim', father:'Faizul Karim', mother:'Nuruzzahan', address:'Baraiyakata, Barbakia', phone:'01866356603', blood:'B+'},
+            {id:41, name:'Habibur Rahman Saimun', father:'Mir Kasem', mother:'Setara Begum', address:'Hajir Bari, Toitong', phone:'01824829600', blood:'B+'},
+            {id:42, name:'Md. Al Amin Rifat', father:'Md. Hanif', mother:'Rabeya Begum', address:'Hajirghona, Shilkhali', phone:'01728440367', blood:'O+'},
+            {id:43, name:'Md. Mizanur Rahman', father:'Md. Nur-Us-Safa', mother:'Mosammat Fatema Begum', address:'Lamarpara, Shilkhali', phone:'01782195773', blood:'O+'},
+            {id:44, name:'Abdullah Al Imran', father:'Enamul Haque', mother:'Jannatul Ferdous', address:'Paharchada, Chakaria', phone:'01881581056', blood:'AB+'},
+            {id:45, name:'Mohammad Naqibul Islam', father:'Mohammad Nurunnabi', mother:'Jannatul Ferdous', address:'Baraiyakata, Barbakia', phone:'01622369027', blood:'B+'},
+            {id:46, name:'Ariful Hasan Tazim', father:'Dinaj', mother:'Asmaul Husna', address:'Dhaniakata, Toitong', phone:'N/A', blood:'O+'},
+            {id:47, name:'Abu Hanif Mohammad Noman', father:'Harun Or Rashid', mother:'Jannatul Mawa', address:'Pethan Matbar Para, Shilkhali', phone:'01887027041', blood:'O+'},
+            {id:48, name:'Mohammad Zahed Hossain', father:'Nurul Abshar', mother:'Shaheda Begum', address:'Baraiyakata, Barbakia', phone:'01846476159', blood:'A+'},
+            {id:49, name:'Md. Nayem Uddin', father:'Jasim Uddin', mother:'Rina Akhterm', address:'Varuakhali, Barabakia', phone:'01816652080', blood:'O+'},
+            {id:50, name:'Shaker Ullah Sourav', father:'Ziaur Rahman', mother:'Kajal Rekha', address:'Jarulbania, Shilkhali', phone:'01823690226', blood:'O+'},
+            {id:51, name:'Naimul Islam Raihan', father:'Mohammad Mansur Alam', mother:'Rehena Jannat', address:'Andhakali, Pekua', phone:'01838413562', blood:'AB+'},
+            {id:52, name:'Shamim Uddin', father:'Jamal Uddin', mother:'Shahnaz Begum', address:'PahariyaKhali, Barabakia', phone:'01869542139', blood:'A-'},
+            {id:53, name:'Sayed Taunjeef Abdullah', father:'Jahangir Alam', mother:'Roksana Begum', address:'Bazar Para, Shilkhali', phone:'01865962413', blood:'A+'},
+            {id:54, name:'Habibul Islam Nishan', father:'Abdul Karim', mother:'Fazulu Akhter', address:'Qutub Para, Barbakia', phone:'01838931130', blood:'O+'},
+            {id:55, name:'Md. Khaled Saifullah', father:'Md. Habibur Rahman', mother:'Md. Khadija Khatun', address:'Bhulbaria, Santhia, Pabna', phone:'01758628072', blood:'O+'},
+            {id:56, name:'Abdullah Al Raiyan', father:'Liaquat Ali', mother:'Luthfun Nicha', address:'Baraiyakata, Barbakia', phone:'01811504117', blood:'O+'},
+            {id:57, name:'Hizbullah', father:'Kabir Ahamad', mother:'Hamida Begum Bulbul', address:'Purba Mehernama, Pekua', phone:'01876224484', blood:'A+'},
+            {id:58, name:'Yasin Arafat', father:'Abdul Quddus', mother:'Kamrun Nahar', address:'Khajanagar, Baritali', phone:'01867858649', blood:'O+'},
+            {id:59, name:'Shefayatul Islam Mehedi', father:'Md. Yusuf', mother:'Amena Begum', address:'Dhaniakata, Toitong', phone:'01833857655', blood:'B+'},
+            {id:60, name:'Md. Rifat', father:'Zaidul Haque', mother:'Parvin Akhter', address:'Bazarpara, Barabakia', phone:'01874044639', blood:'O+'},
+            {id:61, name:'Md. Rakibul Hasan Rakib', father:'Md. Jamir Alam', mother:'Amena Begum', address:'Abdul Hamid Sikdar Para, Pekua', phone:'01885037044', blood:'A+'},
+            {id:62, name:'Tazibur Rahman', father:'Amir Hosen', mother:'Homaira Akter', address:'Hedayatabad, Shilkhali', phone:'01834743186', blood:'A+'},
+];
+
+        function populateTable() {
+            const tbody = document.getElementById('tableBody');
+            students.forEach(student => {
+                const row = tbody.insertRow();
+                const bloodClass = student.blood.includes('+') ? 'blood-positive' : 
+                                   student.blood === 'N/A' ? 'blood-na' : 'blood-negative';
+                
+                row.innerHTML = `
+                    <td>${String(student.id).padStart(2, '0')}</td>
+                    <td><span class="student-name">${student.name}</span></td>
+                    <td>${student.father}</td>
+                    <td>${student.mother}</td>
+                    <td>${student.address}</td>
+                    <td><a href="tel:${student.phone}" class="phone-link">${student.phone}</a></td>
+                    <td><span class="${bloodClass}">${student.blood}</span></td>
+                `;
+            });
+            updateStats();
+        }
+
+        function filterTable() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#tableBody tr');
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                const isVisible = text.includes(input);
+                row.style.display = isVisible ? '' : 'none';
+                if (isVisible) visibleCount++;
+            });
+
+            document.getElementById('visibleStats').textContent = visibleCount;
+            document.getElementById('noResults').classList.toggle('hidden', visibleCount > 0);
+        }
+
+        function updateStats() {
+            const boysCount = students.filter(s => s.gender === 'M').length;
+            const girlsCount = students.filter(s => s.gender === 'F').length;
+            
+            document.getElementById('totalStats').textContent = students.length;
+            document.getElementById('boysStats').textContent = boysCount;
+            document.getElementById('girlsStats').textContent = girlsCount;
+            document.getElementById('visibleStats').textContent = students.length;
+        }
+
+        // Initialize table on page load
+        document.addEventListener('DOMContentLoaded', populateTable);
+    </script>
+</body>
+</html>
